@@ -64,3 +64,14 @@ $ forge --help
 $ anvil --help
 $ cast --help
 ```
+
+
+### Tips and tricks
+
+For Chainlink Automation add contract address to register new upkeep
+
+After registering we can forge verify-contract --show-standard-json-input into a file if the contract did not verify.
+
+Remember deploying with anvil, make sure anvil node is running first.
+
+run forge coverage --report debug > coverage.txt to generate coverage report and save fiile

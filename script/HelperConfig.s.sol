@@ -11,6 +11,8 @@ abstract contract CodeConstants {
     uint8 public constant DECIMALS = 8;
     int256 public constant INITIAL_PRICE = 4000e8;
 
+    uint256 constant FUND_AMOUNT = 1000 ether;
+
     /*//////////////////////////////////////////////////////////////
                                CHAIN IDS
     //////////////////////////////////////////////////////////////*/
@@ -56,6 +58,7 @@ contract HelperConfig is Script, CodeConstants{
         bytes32 keyHash;
         uint256 subscriptionId;
         address linkTokenAddress;
+        address account;
     }
 
      NetworkConfig public localNetworkConfig;
@@ -92,7 +95,8 @@ contract HelperConfig is Script, CodeConstants{
             vrfCoordinator: VRF_COORDINATOR_SEPOLIA,
             keyHash: KEY_HASH_SEPOLIA,
             subscriptionId: 36519466797660437088822149621106901780034305463039990526112483595192675524722, // to be filled in after deployment
-            linkTokenAddress: SEPOLIA_LINK_TOKEN
+            linkTokenAddress: SEPOLIA_LINK_TOKEN,
+            account: 0xFbE6240fA92DA1a8d969fd4518e56Bfe475594e0
         }); 
      }
 
@@ -103,7 +107,8 @@ contract HelperConfig is Script, CodeConstants{
             vrfCoordinator: VRF_COORDINATOR_BASE_SEPOLIA,
             keyHash: KEY_HASH_BASE_SEPOLIA,
             subscriptionId: 0, // to be filled in after deployment
-            linkTokenAddress: BASE_SEPOLIA_LINK_TOKEN
+            linkTokenAddress: BASE_SEPOLIA_LINK_TOKEN,
+            account: 0xFbE6240fA92DA1a8d969fd4518e56Bfe475594e0
         }); 
      }
 
@@ -114,7 +119,8 @@ contract HelperConfig is Script, CodeConstants{
             vrfCoordinator: VRF_COORDINATOR_MAINNET,
             keyHash: KEY_HASH_MAINNET,
             subscriptionId: 0, // to be filled in after deployment
-            linkTokenAddress: MAINNET_LINK_TOKEN
+            linkTokenAddress: MAINNET_LINK_TOKEN,
+            account: 0xFbE6240fA92DA1a8d969fd4518e56Bfe475594e0 
         }); 
      }
 
@@ -139,7 +145,8 @@ contract HelperConfig is Script, CodeConstants{
             vrfCoordinator: address(vrfCoordinatorV2_5Mock),
             keyHash: KEY_HASH_SEPOLIA,
             subscriptionId: 0, // to be filled in after deployment
-            linkTokenAddress: address(linkToken) // Link token not needed for mocks
+            linkTokenAddress: address(linkToken), // Link token not needed for mocks,
+            account: 0x1804c8AB1F12E6bbf3894d4083f33e07309d1f38 //Base/.sol default address
         });
 
         return localNetworkConfig;

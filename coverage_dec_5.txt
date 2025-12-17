@@ -1,0 +1,25 @@
+Compiling 44 files with Solc 0.8.30
+Solc 0.8.30 finished in 1.88s
+Compiler run successful!
+Analysing contracts...
+Running tests...
+
+Ran 9 tests for test/unit/RaffleTest.t.sol:RaffleTest
+[PASS] testCheckUpkeepReturnsFalseIfNoPlayers() (gas: 20743)
+[PASS] testEnteringRaffleEmitsEvent() (gas: 115911)
+[PASS] testEntranceFeeIsSetCorrectly() (gas: 11402)
+[PASS] testPlayerIsAddedOnEnterRaffle() (gas: 122273)
+[PASS] testPlayersCannotEnterWhenRaffleIsCalculating() (gas: 334493)
+[FAIL: assertion failed: 0 != 10140000000000000000] testRaffleCanSelectWinner() (gas: 452053)
+[PASS] testRaffleInitialState() (gas: 11605)
+[PASS] testRaffleRevertsWhenNotEnoughEthIsSent() (gas: 17813)
+[PASS] testStartTimeIsLessThanOrEqualToBlockTimestamp() (gas: 14555)
+Suite result: FAILED. 8 passed; 1 failed; 0 skipped; finished in 21.02ms (48.13ms CPU time)
+
+Ran 1 test suite in 23.11ms (21.02ms CPU time): 8 tests passed, 1 failed, 0 skipped (9 total tests)
+
+Failing tests:
+Encountered 1 failing test in test/unit/RaffleTest.t.sol:RaffleTest
+[FAIL: assertion failed: 0 != 10140000000000000000] testRaffleCanSelectWinner() (gas: 452053)
+
+Encountered a total of 1 failing tests, 8 tests succeeded

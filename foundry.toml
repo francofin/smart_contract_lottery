@@ -7,3 +7,11 @@ remappings=[
     "@solmate/tokens/=lib/solmate/src/tokens/"
 ]
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+#Gives read access to the broadcast and reports folder
+fs_permissions = [
+    { access = "read", path = "./broadcast" },
+    { access = "read", path = "./reports" },
+]
+
+[fuzz]
+runs = 500

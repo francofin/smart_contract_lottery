@@ -13,6 +13,7 @@ import {PriceConverter} from "./PriceConverter.sol";
 import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 import {VRFConsumerBaseV2Plus} from "@chainlink/contracts/src/v0.8/vrf/dev/VRFConsumerBaseV2Plus.sol";
 import {VRFV2PlusClient} from "@chainlink/contracts/src/v0.8/vrf/dev/libraries/VRFV2PlusClient.sol";
+import {console2} from "forge-std/console2.sol";
 
 contract Raffle is VRFConsumerBaseV2Plus {
     error Raffle__NotEnoughEthEntered();
@@ -20,6 +21,7 @@ contract Raffle is VRFConsumerBaseV2Plus {
     error Raffle__TransferFailed();
     error Raffle__RaffleNotOpen();
     error Raffle__UpKeepNotNeeded(uint256 currentBalance, uint256 numPlayers, uint256 raffleState);
+    event RequestedRaffleWinner(uint256 indexed requestId);
 
     using PriceConverter for uint256;
 
@@ -177,7 +179,8 @@ contract Raffle is VRFConsumerBaseV2Plus {
             )
         });
 
-        s_vrfCoordinator.requestRandomWords(request); //passed into fulfillrandom words
+        uint256 requestId = s_vrfCoordinator.requestRandomWords(request); //passed into fulfillrandom words
+        emit RequestedRaffleWinner(requestId);
     }
 
     function fulfillRandomWords(uint256 /*requestId*/, uint256[] calldata randomWords) internal override {
@@ -189,6 +192,9 @@ contract Raffle is VRFConsumerBaseV2Plus {
         uint256 indexOfWinner = (randomWords[0] % numPlayers);
         address payable recentWinner = m_players[indexOfWinner];
         s_recentWinner = recentWinner;
+        console2.log("The recent winner is:", recentWinner);
+        console2.log("The prize amount is:", address(this).balance);
+        console2.log("TotalPool:", s_totalPool);    
 
         emit WinnerPicked(recentWinner, address(this).balance);
         (bool sent, ) = recentWinner.call{value: address(this).balance}("");
